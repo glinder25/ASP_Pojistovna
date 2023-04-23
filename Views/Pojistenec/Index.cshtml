@@ -1,0 +1,86 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<PojistovnaApp.Models.Pojistenec>
+
+@{
+    ViewData["Title"] = "Pojištěnci";
+}
+
+<!-- Upozornění -->
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert @TempData["AlertClass"] alert-dismissible fade show" role="alert">
+        @TempData["AlertMessage"]
+    </div>
+    <script src="~/js/alert.js"></script>
+}
+
+<h1>@ViewData["Title"]</h1>
+<section>
+    <div class="text-center">
+        <a asp-action="Create" class="btn btn-outline-primary">Nový pojištěnec</a>
+    </div>
+    <!-- Seznam pojištěnců -->
+    <div class="table-responsive">
+    <table class="table mt-3 table-bordered">
+        <thead>
+            <tr>
+                <th>Jméno</th>
+                <th>Bydliště</th>
+                @if (!User.IsInRole("admin"))
+                {   
+                    <!-- skryje se všem uživatelům bez role "admin" -->
+                    <th class="hide-column"></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["Pojistenci"] as IEnumerable<PojistovnaApp.Models.Pojistenec>)
+            {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">@item.Jmeno @item.Prijmeni</a>
+                        </td>
+                        <td>
+                        @item.UliceCisloPopisne, @item.Mesto
+                        </td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <!-- zobrazí se všem uživatelům s rolí "admin" -->
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning rounded-3">Editovat</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger mx-2 rounded-3">Odstranit</a>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <!-- Stránkování -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if ((int)ViewData["CisloStrany"] > 1)
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] - 1 })">Předchozí</a>
+                </li>
+            }
+            @for (int i = 1; i <= (int)ViewData["PocetStran"]; i++)
+            {
+                <li class="page-item @(i == (int)ViewData["CisloStrany"] ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = i })">@i</a>
+                </li>
+            }
+            @if ((int)ViewData["CisloStrany"] < (int)ViewData["PocetStran"])
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == (int)ViewData["PocetStran"] ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] + 1 })">Další</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</section>

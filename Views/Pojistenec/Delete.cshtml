@@ -1,0 +1,61 @@
+﻿@model PojistovnaApp.Models.Pojistenec
+
+@{
+    ViewData["Title"] = "Smazat Pojištěnce";
+}
+
+<h1 class="text-danger">@ViewData["Title"]</h1>
+<h6 class="text-danger">jste si jistý, že chcete odstranit tohoto pojištěnce?</h6>
+<hr />
+
+<section>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jmeno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prijmeni)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TelefonniCislo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TelefonniCislo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UliceCisloPopisne)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UliceCisloPopisne)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mesto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mesto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PSC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PSC)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="form-group col-md-3 text-center mt-3">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Smazat" class="btn btn-outline-danger" />
+    </form>
+</section>

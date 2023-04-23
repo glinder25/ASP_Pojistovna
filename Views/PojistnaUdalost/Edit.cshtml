@@ -1,0 +1,39 @@
+﻿@model PojistovnaApp.Models.PojistnaUdalost
+
+@{
+    ViewData["Title"] = "Upravit pojistnou událost";
+}
+
+<h1 class="text-warning">@ViewData["Title"]</h1>
+
+<hr />
+<section class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="PojisteniId" value="@Model.PojisteniId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Datum" class="control-label"></label>
+                <input asp-for="Datum" class="form-control" />
+                <span asp-validation-for="Datum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Popis" class="control-label"></label>
+                <input asp-for="Popis" class="form-control" />
+                <span asp-validation-for="Popis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CastkaPoskozeni" class="control-label"></label>
+                <input asp-for="CastkaPoskozeni" class="form-control" />
+                <span asp-validation-for="CastkaPoskozeni" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 text-center">
+                <input type="submit" value="Upravit" class="btn btn-outline-warning" />
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

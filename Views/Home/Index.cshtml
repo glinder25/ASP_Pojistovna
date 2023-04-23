@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Uvodní stránka";
+}
+<header>
+    <h1 class="display-4 text-center">Vítejte na stránkách pojišťovny</h1>
+    <hr />
+</header>
+<section>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            Jsme tady, abychom vám poskytli nejlepší služby v oblasti <strong>pojištění.</strong> 
+            S naší dlouholetou zkušeností a odbornými znalostmi vám můžeme nabídnout nejlepší řešení pro vaše potřeby.
+        </p>
+        <p>
+            V naší nabídce najdete široké spektrum produktů a služeb, jako jsou <em>životní pojištění, cestovní pojištění, pojištění majetku</em> a mnoho dalších. 
+            Všechna naše pojištění jsou navržena tak, aby poskytovala nejlepší ochranu pro vaše potřeby a vaši rodinu.
+        </p>
+        <p>
+            S našimi moderními technologiemi můžete snadno spravovat své pojištění z pohodlí vašeho domova. 
+            Na našem webu najdete všechny informace o vašem pojištění, můžete si sjednat nové pojištění <strong>online.</strong>
+        </p>
+    }
+    else
+    {
+        <p>
+            Pokud již jste zákazníkem naší společnosti, prosím <a class="text-primary" asp-controller="Account" asp-action="Login">Přihlaste se</a> 
+            do svého účtu, abyste mohli spravovat svá pojistná data.
+        </p>
+        <p>
+            Pokud jste novým zákazníkem, neváhejte se <a class="text-primary" asp-controller="Account" asp-action="Register">Registrovat</a> 
+            a získejte přístup ke všem našim produktům a službám.
+        </p>
+        <p>
+            Nabízíme kvalitní a spolehlivé <strong>pojištění</strong>, které Vám zajistí klid a bezpečí.
+        </p>
+        <p>
+            S našimi moderními technologiemi můžete snadno spravovat své pojištění z pohodlí vašeho domova. 
+            Na našem webu najdete všechny informace o vašem pojištění, můžete si sjednat nové pojištění <strong>online.</strong>
+        </p>
+        <p> 
+            Děkujeme Vám za Vaši důvěru a těšíme se na spolupráci!
+        </p>
+    }
+</section>

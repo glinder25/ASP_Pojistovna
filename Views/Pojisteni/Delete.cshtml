@@ -1,0 +1,49 @@
+﻿@model PojistovnaApp.Models.Pojisteni
+
+@{
+    ViewData["Title"] = "Smazat Pojištění";
+}
+
+<h1 class="text-danger">@ViewData["Title"]</h1>
+<h3 class="text-danger">Jste si jistý, že chcete odstanit toto pojištění?</h3>
+<hr />
+
+<section>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DruhPojisteni)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DruhPojisteni)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Castka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Castka)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PredmetPojisteni)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PredmetPojisteni)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumZacatku)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatumZacatku)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumKonce)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatumKonce)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="form-group col-md-3 text-center mt-3">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Smazat" class="btn btn-outline-danger" />
+    </form>
+</section>

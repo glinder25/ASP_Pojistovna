@@ -1,0 +1,80 @@
+﻿@model PojistovnaApp.Models.Pojistenec
+
+@{
+    ViewData["Title"] = "Nový pojištěnec";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<section class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Jmeno" class="control-label"></label>
+                        <input asp-for="Jmeno" class="form-control" />
+                        <span asp-validation-for="Jmeno" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Prijmeni" class="control-label"></label>
+                        <input asp-for="Prijmeni" class="form-control" />
+                        <span asp-validation-for="Prijmeni" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="TelefonniCislo" class="control-label"></label>
+                        <input asp-for="TelefonniCislo" class="form-control" />
+                        <span asp-validation-for="TelefonniCislo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="UliceCisloPopisne" class="control-label"></label>
+                        <input asp-for="UliceCisloPopisne" class="form-control" />
+                        <span asp-validation-for="UliceCisloPopisne" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Mesto" class="control-label"></label>
+                        <input asp-for="Mesto" class="form-control" />
+                        <span asp-validation-for="Mesto" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PSC" class="control-label"></label>
+                        <input asp-for="PSC" class="form-control" />
+                        <span asp-validation-for="PSC" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12 text-center mt-3">
+                <input type="submit" value="Uložit" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

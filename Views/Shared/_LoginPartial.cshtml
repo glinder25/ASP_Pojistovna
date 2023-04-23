@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item d-flex align-items-center">
+        <span class="navbar-text">
+            @if (User.IsInRole("admin"))
+            {
+                <span class="text-white">Admin</span>
+            }
+            else
+            {
+                <span class="text-white">Uživatel</span>
+            }
+        </span>
+    </li>
+    <li class="nav-item">
+        <form class="form-inline" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Page("/Index")" method="post">
+            <button type="submit" class="nav-link btn btn-link text-muted">Odhlásit</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-white" asp-controller="Account" asp-action="Register">Registrovat</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-muted" asp-controller="Account" asp-action="Login">Přihlásit</a>
+    </li>
+}
+</ul>
+

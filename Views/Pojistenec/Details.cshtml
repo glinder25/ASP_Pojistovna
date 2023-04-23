@@ -1,0 +1,122 @@
+﻿@model PojistovnaApp.Models.Pojistenec
+@{
+    var pojisteni = ViewData["Pojisteni"] as List<Pojisteni>;
+}
+
+<!-- Upozornění -->
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert @TempData["AlertClass"] alert-dismissible fade show" role="alert">
+        @TempData["AlertMessage"]
+    </div>
+    <script src="~/js/alert.js"></script>
+}
+<!-- Detail pojištěnce -->
+<section class="row">
+    <div class="col-md-4">
+        <img src="~/images/no_avatar.png" class="img-fluid img-thumbnail w-80" alt="No-Avatar" />
+    </div>
+    <div class="col-md-8">
+        <h1 class="mb-5">@Model.Jmeno @Model.Prijmeni</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-5">@Model.UliceCisloPopisne</p>
+                <p class="mb-5">@Model.Mesto</p>
+                <p class="mb-5">@Model.PSC</p>
+            </div>
+            <div class="col-md-6">
+                <p class="mb-5">@Model.Email</p>
+                <p class="mb-5">@Model.TelefonniCislo</p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Sjednaná pojištění</h2>
+    <!-- Seznam sjednaných pojištění -->
+    <div class="table-responsive">
+    <table class="table mt-1 table-bordered">
+        <!-- Tabulková hlavička -->
+        <thead>
+            <tr>
+                <th>Pojištění</th>
+                <th>Částka</th>
+                @if (!User.IsInRole("admin"))
+                {   
+                    <!-- skryje se všem uživatelům bez role "admin" -->
+                    <th class="hide-column"></th>
+                }
+            </tr>
+        </thead>
+        <!-- Tabulkové tělo -->
+        <tbody>
+            <!-- Výpis položek na aktuální stránce -->
+            @foreach (var polozka in pojisteni)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-controller="Pojisteni" asp-route-id="@polozka.Id">@polozka.DruhPojisteni</a>
+                    </td>
+                    <td>@polozka.Castka</td>
+                     @if (User.IsInRole("admin"))
+                    {
+                        <!-- zobrazí se všem uživatelům s rolí "admin" -->
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-controller="Pojisteni" asp-route-id="@polozka.Id" 
+                                class="btn btn-sm btn-outline-warning mx-2 rounded-3">Editovat</a>
+                                <a asp-action="Delete" asp-controller="Pojisteni" asp-route-id="@polozka.Id" 
+                                class="btn btn-sm btn-outline-danger rounded-3">Odstranit</a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <!-- Stránkování -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if ((int)ViewData["CisloStrany"] > 1)
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] - 1 })">Předchozí</a>
+                </li>
+            }
+            @for (int i = 1; i <= (int)ViewData["PocetStran"]; i++)
+            {
+                <li class="page-item @(i == (int)ViewData["CisloStrany"] ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = i })">@i</a>
+                </li>
+            }
+            @if ((int)ViewData["CisloStrany"] < (int)ViewData["PocetStran"])
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == (int)ViewData["PocetStran"] ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] + 1 })">Další</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8 text-center">
+            @if (User.IsInRole("admin"))
+            {
+                <!-- zobrazí se všem uživatelům s rolí "admin" -->
+                <div class="btn-group" role="group">
+                    <a asp-action="Create" asp-controller="Pojisteni" asp-route-pojistnikId="@Model.Id" 
+                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojištění</a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" 
+                    class="btn btn-sm btn-outline-warning mx-2 rounded-3">Editovat Pojištěnce</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" 
+                    class="btn btn-sm btn-outline-danger rounded-3">Odstranit Pojištěnce</a>
+                </div>
+            }
+            else
+            {
+                <!-- zobrazí se všem uživatelům bez role "admin" -->
+                    <a asp-action="Create" asp-controller="Pojisteni" asp-route-pojistnikId="@Model.Id" 
+                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojištění</a>
+            }
+        </div>
+    </div>
+</section>

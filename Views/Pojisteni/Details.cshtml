@@ -1,0 +1,123 @@
+﻿@model PojistovnaApp.Models.Pojisteni
+
+@{
+ViewData["Title"] = "Detail";
+var udalosti = ViewData["Udalosti"] as List<PojistnaUdalost>;
+}
+<!-- Upozornění -->
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert @TempData["AlertClass"] alert-dismissible fade show" role="alert">
+        @TempData["AlertMessage"]
+    </div>
+    <script src="~/js/alert.js"></script>
+}
+<!-- Detail pojištění -->
+<section>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>@Model.DruhPojisteni Pojištění</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Předmět pojištění:<br/><strong>@Model.PredmetPojisteni</strong></p>
+                    <p>Částka pojištění:<br/> <strong>@Model.Castka</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <p>Datum začátku pojištění:<br/><strong>@Model.DatumZacatku.ToShortDateString()</strong></p>
+                    <p>Datum konce pojištění:<br/><strong>@Model.DatumKonce.ToShortDateString()</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>Pojistné události</h2>
+            <!-- Seznam pojistných událostí -->
+            <div class="table-responsive">
+                <table class="table mt-3 table-bordered">
+                    <!-- Tabulková hlavička -->
+                    <thead>
+                        <tr>
+                            <th>Popis události</th>
+                            <th>Datum události</th>
+                            <th>Částka poškození</th>
+                            @if (!User.IsInRole("admin"))
+                            {   
+                                <!-- skryje se všem uživatelům bez role "admin" -->
+                                <th class="hide-column"></th>
+                            }
+                        </tr>
+                    </thead>
+                    <!-- Tabulkové tělo -->
+                    <tbody>
+                        @foreach (var udalost in udalosti)
+                        {
+                            <tr>
+                                <td><a asp-action="Details" asp-controller="PojistnaUdalost" asp-route-id="@udalost.Id">@udalost.Popis</a></td>
+                                <td>@udalost.Datum</td>
+                                <td>@udalost.CastkaPoskozeni</td>
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <!-- zobrazí se všem uživatelům s rolí "admin" -->
+                                    <td>
+                                        <div class="btn-group">
+                                            <a asp-action="Edit" asp-controller="PojistnaUdalost" asp-route-id="@udalost.Id" class="btn btn-sm btn-outline-warning mx-2 rounded-3">Editovat</a>
+                                            <a asp-action="Delete" asp-controller="PojistnaUdalost" asp-route-id="@udalost.Id" class="btn btn-sm btn-outline-danger rounded-3">Odstranit</a>
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Stránkování -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if ((int)ViewData["CisloStrany"] > 1)
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] - 1 })">Předchozí</a>
+                </li>
+            }
+            @for (int i = 1; i <= (int)ViewData["PocetStran"]; i++)
+            {
+                <li class="page-item @(i == (int)ViewData["CisloStrany"] ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = i })">@i</a>
+                </li>
+            }
+            @if ((int)ViewData["CisloStrany"] < (int)ViewData["PocetStran"])
+            {
+                <li class="page-item @((int)ViewData["CisloStrany"] == (int)ViewData["PocetStran"] ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] + 1 })">Další</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8 text-center">
+            @if (User.IsInRole("admin"))
+            {
+                <!-- zobrazí se všem uživatelům s rolí "admin" -->
+                <div class="btn-group" role="group">
+                    <a asp-action="Create" asp-controller="PojistnaUdalost" asp-route-pojisteniId="@Model.Id" 
+                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojistnou událost</a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" 
+                    class="btn btn-sm btn-outline-warning mx-2 rounded-3">Editovat</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" 
+                    class="btn btn-sm btn-outline-danger rounded-3">Odstranit</a>
+                </div>
+            }
+            else
+            {
+                <!-- zobrazí se všem uživatelům bez role "admin" -->
+                <div class="btn-group" role="group">
+                    <a asp-action="Create" asp-controller="PojistnaUdalost" asp-route-pojisteniId="@Model.Id" 
+                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojistnou událost</a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
