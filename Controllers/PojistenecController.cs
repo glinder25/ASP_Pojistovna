@@ -30,8 +30,8 @@ namespace PojistovnaApp.Controllers
                 .ToListAsync();
 
             // Vypočítání celkového počtu stránek
-            int totalCount = await _context.Pojistenci.CountAsync();
-            int pocetStran = (int)Math.Ceiling((double)totalCount / zaznamuNaStranu);
+            int zaznamuCelkem = await _context.Pojistenci.CountAsync();
+            int pocetStran = (int)Math.Ceiling((double)zaznamuCelkem / zaznamuNaStranu);
 
             // Předání dat do view
             ViewData["Pojistenci"] = pojistenci;
