@@ -78,19 +78,19 @@ var udalosti = ViewData["Udalosti"] as List<PojistnaUdalost>;
             @if ((int)ViewData["CisloStrany"] > 1)
             {
                 <li class="page-item @((int)ViewData["CisloStrany"] == 1 ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] - 1 })">Předchozí</a>
+                    <a class="page-link" href="@Url.Action("Details", new { cisloStrany = (int)ViewData["CisloStrany"] - 1 })">Předchozí</a>
                 </li>
             }
             @for (int i = 1; i <= (int)ViewData["PocetStran"]; i++)
             {
                 <li class="page-item @(i == (int)ViewData["CisloStrany"] ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = i })">@i</a>
+                    <a class="page-link" href="@Url.Action("Details", new { cisloStrany = i })">@i</a>
                 </li>
             }
             @if ((int)ViewData["CisloStrany"] < (int)ViewData["PocetStran"])
             {
                 <li class="page-item @((int)ViewData["CisloStrany"] == (int)ViewData["PocetStran"] ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { cisloStrany = (int)ViewData["CisloStrany"] + 1 })">Další</a>
+                    <a class="page-link" href="@Url.Action("Details", new { cisloStrany = (int)ViewData["CisloStrany"] + 1 })">Další</a>
                 </li>
             }
         </ul>
