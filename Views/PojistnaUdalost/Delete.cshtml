@@ -30,8 +30,12 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete" class="form-group col-md-3 text-center mt-3">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Smazat" class="btn btn-outline-danger" />
-    </form>
+    <div class="btn-group" role="group">
+        <a asp-action="Details" asp-controller="Pojisteni" asp-route-Id="@Model.PojisteniId"
+           class="btn btn-outline-secondary rounded-3">Zpět</a>
+        <form asp-action="Delete" class="form-group col-md-3 text-center mx-2">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Smazat" class="btn btn-outline-danger" />
+        </form>
+    </div>
 </section>

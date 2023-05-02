@@ -102,19 +102,23 @@
             {
                 <!-- zobrazí se všem uživatelům s rolí "admin" -->
                 <div class="btn-group" role="group">
+                    <a asp-controller="Pojistenec" asp-action="Index" class="btn btn-outline-secondary mx-2 rounded-3">Zpět</a>
                     <a asp-action="Create" asp-controller="Pojisteni" asp-route-pojistnikId="@Model.Id" 
-                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojištění</a>
+                    class="btn btn-outline-primary  rounded-3">Přidat Pojištění</a>
                     <a asp-action="Edit" asp-route-id="@Model.Id" 
-                    class="btn btn-sm btn-outline-warning mx-2 rounded-3">Editovat Pojištěnce</a>
+                    class="btn btn-outline-warning mx-2 rounded-3">Editovat Pojištěnce</a>
                     <a asp-action="Delete" asp-route-id="@Model.Id" 
-                    class="btn btn-sm btn-outline-danger rounded-3">Odstranit Pojištěnce</a>
+                    class="btn btn-outline-danger rounded-3">Odstranit Pojištěnce</a>
                 </div>
             }
             else
             {
                 <!-- zobrazí se všem uživatelům bez role "admin" -->
+                <div class="btn-group" role="group">
+                    <a asp-controller="Pojistenec" asp-action="Index" class="btn btn-outline-secondary rounded-3">Zpět</a>
                     <a asp-action="Create" asp-controller="Pojisteni" asp-route-pojistnikId="@Model.Id" 
-                    class="btn btn-sm btn-outline-primary rounded-3">Přidat Pojištění</a>
+                    class="btn btn-outline-primary mx-2 rounded-3">Přidat Pojištění</a>
+                </div>
             }
         </div>
     </div>

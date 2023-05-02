@@ -27,6 +27,8 @@
                 <span asp-validation-for="CastkaPoskozeni" class="text-danger"></span>
             </div>
             <div class="form-group col-md-12 text-center mt-3">
+                <a asp-controller="Pojisteni" asp-action="Details" asp-route-id="@ViewBag.PojisteniId"
+                   class="btn btn-outline-secondary rounded-3">Zpět</a>
                 <input type="submit" value="Přidat" class="btn btn-outline-primary" />
             </div>
         </form>

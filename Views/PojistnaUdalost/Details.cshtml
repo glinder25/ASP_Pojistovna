@@ -27,8 +27,9 @@
             @Html.DisplayFor(model => model.CastkaPoskozeni)
         </dd>
     </dl>
-    <div>
-        <a asp-action="Index" class="btn btn-outline-primary">Zpět na seznam</a>
+    <div class="btn-group" role="group">
+        <a asp-action="Details" asp-controller="Pojisteni" asp-route-Id="@Model.PojisteniId"
+           class="btn btn-outline-secondary rounded-3">Zpět</a>
     </div>
 </section>
 

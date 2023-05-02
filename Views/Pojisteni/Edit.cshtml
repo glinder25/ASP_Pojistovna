@@ -39,6 +39,8 @@ ViewData["Title"] = "Upravit pojištění";
                 </div>
             </div>
             <div class="form-group mt-3 text-center">
+                <a asp-action="Details" asp-controller="Pojistenec" asp-route-Id="@Model.PojistnikId"
+                   class="btn btn-outline-secondary mx-2 rounded-3">Zpět</a>
                 <input type="submit" value="Upravit" class="btn btn-outline-warning" />
             </div>
         </form>
