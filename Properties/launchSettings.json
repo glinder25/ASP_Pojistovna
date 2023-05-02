@@ -26,3 +26,30 @@
     }
   }
 }
+//{
+//  "iisSettings": {
+//    "windowsAuthentication": false,
+//    "anonymousAuthentication": true,
+//    "iisExpress": {
+//      "applicationUrl": "http://www.trojanl.cz",
+//      "sslPort": 44359
+//    }
+//  },
+//  "profiles": {
+//    "IIS Express": {
+//      "commandName": "IISExpress",
+//      "launchBrowser": true,
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Production"
+//      }
+//    },
+//    "PojistovnaApp": {
+//      "commandName": "Project",
+//      "launchBrowser": true,
+//      "applicationUrl": "https://www.trojanl.cz;http://www.trojanl.cz",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Production"
+//      }
+//    }
+//  }
+//}
