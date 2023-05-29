@@ -25,7 +25,7 @@ namespace PojistovnaApp.Controllers
             // Získání seznamu pojištění a stránkování
             int zaznamuNaStranu = 5;
             var pojisteni = await _context.Pojisteni
-                .OrderBy(p => p.Id)
+                //.OrderBy(p => p.Id)
                 .Skip((cisloStrany - 1) * zaznamuNaStranu)
                 .Take(zaznamuNaStranu)
                 .ToListAsync();
